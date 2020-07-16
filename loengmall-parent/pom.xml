@@ -6,10 +6,22 @@
 
     <groupId>com.loeng</groupId>
     <artifactId>loengmall-parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <description>
         loeng's shopping mall parent project
     </description>
+    <modules>
+        <module>loengmall-gateway</module>
+        <module>loengmall-service</module>
+        <module>loengmall-service-api</module>
+        <module>loengmall-web</module>
+        <module>loengmall-eureka</module>
+        <module>loengmall-common</module>
+        <module>loengmall-common-db</module>
+        <module>loengmall-service-goods-api</module>
+        <module>loengmall-service-goods-api</module>
+    </modules>
 
 
     <parent>
