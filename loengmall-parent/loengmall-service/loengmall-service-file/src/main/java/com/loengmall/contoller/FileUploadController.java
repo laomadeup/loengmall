@@ -26,6 +26,16 @@ import java.io.IOException;
 public class FileUploadController {
 
 
+    /**
+     * <p>文件上传</p>
+     *
+     * * @param file
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/20 21:09
+     */
     @PostMapping
     public Result upload(@RequestParam(value = "file") MultipartFile file) throws IOException, MyException {
 
@@ -33,8 +43,12 @@ public class FileUploadController {
                 file.getBytes(),
                 StringUtils.getFilenameExtension(file.getOriginalFilename()));
 
-        FastDFSUtil.upload(fastDFSFile);
-        return new Result(true, StatusCode.OK,"上传成功");
+        String[] uploads = FastDFSUtil.upload(fastDFSFile);
+
+        //拼接访问地址 url
+//        String url = "http://47.75.255.86:8080/"+uploads[0]+"/"+uploads[1];
+        String url = FastDFSUtil.getTrackerInfo()+"/"+uploads[0]+"/"+uploads[1];
+        return new Result(true, StatusCode.OK,"上传成功",url);
     }
 
 }
