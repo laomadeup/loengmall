@@ -49,7 +49,7 @@ public class BrandServiceImpl implements BrandService {
      * @param size
      * @return com.github.pagehelper.PageInfo<com.loengmall.goods.pojo.Brand>
      * @author mapengliang
-     * @createTime 2020/7/17 17:29
+     * @createTime 2020/7/17 17:37
      */
     @Override
     public PageInfo<Brand> findPage(Integer page, Integer size) {

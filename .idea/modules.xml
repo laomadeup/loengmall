@@ -4,6 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/loengmall.iml" filepath="$PROJECT_DIR$/.idea/loengmall.iml" />
       <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-parent.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-service-api/loengmall-service-api.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-service-api/loengmall-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service-file/loengmall-service-file.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service-file/loengmall-service-file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service-goods/loengmall-service-goods.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-service/loengmall-service-goods/loengmall-service-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-service-api/loengmall-service-goods-api/loengmall-service-goods-api.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-service-api/loengmall-service-goods-api/loengmall-service-goods-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loengmall-parent/loengmall-web/loengmall-web.iml" filepath="$PROJECT_DIR$/loengmall-parent/loengmall-web/loengmall-web.iml" />
     </modules>
   </component>
 </project>
