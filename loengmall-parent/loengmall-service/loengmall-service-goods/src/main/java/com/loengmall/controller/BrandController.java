@@ -46,7 +46,7 @@ public class BrandController {
     @PostMapping(value = "/search/{page}/{size}")
     public Result<PageInfo<Brand>> findPage(@RequestBody Brand brand, @PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size) {
 
-        int i = 1/0;
+
         PageInfo<Brand> brandPageInfo = brandService.findPage(brand, page, size);
         return new Result<>(true, StatusCode.OK, "分页搜索成功!", brandPageInfo);
     }
@@ -88,6 +88,16 @@ public class BrandController {
     }
 
 
+    /**
+     * <p>delete</p>
+     *
+     * * @param id
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/21 10:09
+     */
     @DeleteMapping(value = "/{id}")
     public Result delete(@PathVariable(value = "id") Integer id) {
         brandService.delete(id);
@@ -113,7 +123,7 @@ public class BrandController {
 
 
     /**
-     * <p>修改品牌</p>
+     * <p>新增品牌</p>
      * <p>
      * * @param brand
      *
