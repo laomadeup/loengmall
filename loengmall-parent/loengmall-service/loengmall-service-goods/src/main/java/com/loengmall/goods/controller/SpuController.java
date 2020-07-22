@@ -1,6 +1,7 @@
 package com.loengmall.goods.controller;
 import com.loeng.entity.Result;
 import com.loeng.entity.StatusCode;
+import com.loengmall.goods.pojo.Goods;
 import com.loengmall.goods.pojo.Spu;
 import com.loengmall.goods.service.SpuService;
 import com.github.pagehelper.PageInfo;
@@ -23,6 +24,40 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    /**
+     * <p>根据商品ID查询商品成功</p>
+     *
+     * * @param id
+     *
+     * @return com.loeng.entity.Result<com.loengmall.goods.pojo.Goods>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 22:00
+     */
+    @GetMapping(value = "/goods/{id}")
+    public Result<Goods> findGoodsById(@PathVariable Long id){
+        Goods goods = spuService.findGoodsById(id);
+        return new Result<>(true,StatusCode.OK,"根据商品ID查询商品成功!",goods);
+    }
+
+
+    /**
+     * <p>保存商品成功</p>
+     *
+     * * @param goods
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 21:18
+     */
+    @PostMapping(value = "/save")
+    public Result saveGoods(@RequestBody Goods goods){
+        spuService.saveGoods(goods);
+        return new Result(true,StatusCode.OK,"保存商品成功");
+    }
+
 
     /***
      * Spu分页条件搜索实现

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Goods implements Serializable {
     private Spu spu;
-    private List<Sku> sku;
+    private List<Sku> skuList;
 
     public Spu getSpu() {
         return spu;
@@ -20,11 +20,11 @@ public class Goods implements Serializable {
         this.spu = spu;
     }
 
-    public List<Sku> getSku() {
-        return sku;
+    public List<Sku> getSkuList() {
+        return skuList;
     }
 
-    public void setSku(List<Sku> sku) {
-        this.sku = sku;
+    public void setSkuList(List<Sku> skuList) {
+        this.skuList = skuList;
     }
 }

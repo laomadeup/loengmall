@@ -12,6 +12,19 @@ public interface SpuService {
 
 
     /**
+     * <p>根据商品Id查询商品信息</p>
+     *
+     * * @param id
+     *
+     * @return com.loengmall.goods.pojo.Goods
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 21:57
+     */
+    Goods findGoodsById(Long id);
+
+
+    /**
      * <p>添加商品信息</p>
      *
      * * @param goods
@@ -21,7 +34,7 @@ public interface SpuService {
      * @author mapengliang
      * @createTime 2020/7/22 12:15
      */
-    public void saveGoods(Goods goods);
+     void saveGoods(Goods goods);
 
 
     /***
