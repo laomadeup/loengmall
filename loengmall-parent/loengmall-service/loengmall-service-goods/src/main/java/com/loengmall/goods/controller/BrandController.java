@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.Brand;
 import com.loengmall.goods.service.BrandService;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +24,25 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+
+    /**
+     * <p>根据分类ID查询品牌</p>
+     *
+     * * @param id
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 8:49
+     */
+    @GetMapping(value = "/category/{id}")
+    public Result findBrandByCategory(@PathVariable Integer id){
+        List<Brand> category = brandService.findByCategory(id);
+        return new Result(true,StatusCode.OK,"根据分类ID查询品牌成功!",category);
+    }
+
+
+
     /***
      * Brand分页条件搜索实现
      * @param brand
@@ -33,7 +54,7 @@ public class BrandController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Brand brand, @PathVariable  int page, @PathVariable  int size){
         //调用BrandService实现分页条件查询Brand
         PageInfo<Brand> pageInfo = brandService.findPage(brand, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

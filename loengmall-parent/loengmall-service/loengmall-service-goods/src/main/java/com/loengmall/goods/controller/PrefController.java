@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.Pref;
 import com.loengmall.goods.service.PrefService;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +35,7 @@ public class PrefController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Pref pref, @PathVariable  int page, @PathVariable  int size){
         //调用PrefService实现分页条件查询Pref
         PageInfo<Pref> pageInfo = prefService.findPage(pref, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

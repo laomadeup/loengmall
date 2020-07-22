@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.Category;
 import com.loengmall.goods.service.CategoryService;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +24,24 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
+    /**
+     * <p>根据父Id查询分类</p>
+     *
+     * * @param pid
+     *
+     * @return com.loeng.entity.Result<java.util.List<com.loengmall.goods.pojo.Category>>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 8:40
+     */
+    @GetMapping(value = "/list/{pid}")
+    public Result<List<Category>> findByParentId(@PathVariable Integer pid){
+        List<Category> categories = categoryService.findByParentId(pid);
+        return new Result<>(true,StatusCode.OK,"根据父Id查询分类成功!",categories);
+    }
+
+
     /***
      * Category分页条件搜索实现
      * @param category
@@ -33,7 +53,7 @@ public class CategoryController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Category category, @PathVariable  int page, @PathVariable  int size){
         //调用CategoryService实现分页条件查询Category
         PageInfo<Category> pageInfo = categoryService.findPage(category, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

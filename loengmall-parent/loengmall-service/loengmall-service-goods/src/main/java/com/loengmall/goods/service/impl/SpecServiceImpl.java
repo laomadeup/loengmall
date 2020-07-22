@@ -1,5 +1,7 @@
 package com.loengmall.goods.service.impl;
+import com.loengmall.goods.dao.CategoryMapper;
 import com.loengmall.goods.dao.SpecMapper;
+import com.loengmall.goods.pojo.Category;
 import com.loengmall.goods.pojo.Spec;
 import com.loengmall.goods.service.SpecService;
 import com.github.pagehelper.PageHelper;
@@ -20,6 +22,27 @@ public class SpecServiceImpl implements SpecService {
     @Autowired
     private SpecMapper specMapper;
 
+    @Autowired
+    private CategoryMapper categoryMapper;
+    
+    
+    /**
+     * <p>根据分类Id查询规格</p>
+     *
+     * * @param categoryid
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Spec>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:25
+     */
+    @Override
+    public List<Spec> findByCategory(Integer categoryid) {
+        Category category = categoryMapper.selectByPrimaryKey(categoryid);
+        Spec spec = new Spec();
+        category.setTemplateId(spec.getTemplateId());
+        return specMapper.select(spec);
+    }
 
     /**
      * Spec条件+分页查询

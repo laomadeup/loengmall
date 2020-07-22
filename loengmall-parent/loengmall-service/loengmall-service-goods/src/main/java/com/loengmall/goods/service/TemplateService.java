@@ -9,6 +9,18 @@ import java.util.List;
  *****/
 public interface TemplateService {
 
+    /**
+     * <p>根据分类Id获取模版</p>
+     *
+     * * @param categoryId
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Template>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:26
+     */
+    List<Template> findByCategory(Integer categoryId);
+    
     /***
      * Template多条件分页查询
      * @param template

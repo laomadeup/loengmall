@@ -22,6 +22,21 @@ public class TemplateServiceImpl implements TemplateService {
 
 
     /**
+     * <p>根据分类ID查询模版</p>
+     *
+     * * @param categoryId
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Template>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:29
+     */
+    @Override
+    public List<Template> findByCategory(Integer categoryId) {
+        return templateMapper.findByCategory(categoryId);
+    }
+
+    /**
      * Template条件+分页查询
      * @param template 查询条件
      * @param page 页码

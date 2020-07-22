@@ -22,6 +22,23 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     /**
+     * <p>findByParentId</p>
+     *
+     * * @param parentId
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Category>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 8:31
+     */
+    @Override
+    public List<Category> findByParentId(Integer pid) {
+        Category category = new Category();
+        category.setParentId(pid);
+        return categoryMapper.select(category);
+    }
+
+    /**
      * Category条件+分页查询
      * @param category 查询条件
      * @param page 页码

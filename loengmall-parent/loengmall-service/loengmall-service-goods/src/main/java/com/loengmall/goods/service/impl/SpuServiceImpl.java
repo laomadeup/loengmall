@@ -1,5 +1,6 @@
 package com.loengmall.goods.service.impl;
 import com.loengmall.goods.dao.SpuMapper;
+import com.loengmall.goods.pojo.Goods;
 import com.loengmall.goods.pojo.Spu;
 import com.loengmall.goods.service.SpuService;
 import com.github.pagehelper.PageHelper;
@@ -20,6 +21,11 @@ public class SpuServiceImpl implements SpuService {
     @Autowired
     private SpuMapper spuMapper;
 
+
+    @Override
+    public void saveGoods(Goods goods) {
+
+    }
 
     /**
      * Spu条件+分页查询

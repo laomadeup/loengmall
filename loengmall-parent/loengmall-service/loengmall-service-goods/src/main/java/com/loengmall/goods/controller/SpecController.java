@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.Spec;
 import com.loengmall.goods.service.SpecService;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +24,25 @@ public class SpecController {
     @Autowired
     private SpecService specService;
 
+
+    /**
+     * <p>根据分类ID查询规格</p>
+     *
+     * * @param categoryId
+     *
+     * @return com.loeng.entity.Result<java.util.List<com.loengmall.goods.pojo.Spec>>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:26
+     */
+    @GetMapping(value = "/category/{id}")
+    public Result<List<Spec>> findByCategoryId(@PathVariable(value = "id") Integer categoryId){
+        List<Spec> specs = specService.findByCategory(categoryId);
+        return new Result<>(true,StatusCode.OK,"根据分类ID查询规格成功!",specs);
+    }
+
+
+
     /***
      * Spec分页条件搜索实现
      * @param spec
@@ -33,7 +54,7 @@ public class SpecController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Spec spec, @PathVariable  int page, @PathVariable  int size){
         //调用SpecService实现分页条件查询Spec
         PageInfo<Spec> pageInfo = specService.findPage(spec, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

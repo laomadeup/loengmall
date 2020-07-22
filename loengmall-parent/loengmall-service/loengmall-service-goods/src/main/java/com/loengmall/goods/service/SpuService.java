@@ -1,4 +1,5 @@
 package com.loengmall.goods.service;
+import com.loengmall.goods.pojo.Goods;
 import com.loengmall.goods.pojo.Spu;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
@@ -8,6 +9,20 @@ import java.util.List;
  * @Date 2020/07/21 22:24
  *****/
 public interface SpuService {
+
+
+    /**
+     * <p>添加商品信息</p>
+     *
+     * * @param goods
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 12:15
+     */
+    public void saveGoods(Goods goods);
+
 
     /***
      * Spu多条件分页查询

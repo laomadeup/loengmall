@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.Sku;
 import com.loengmall.goods.service.SkuService;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +35,7 @@ public class SkuController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Sku sku, @PathVariable  int page, @PathVariable  int size){
         //调用SkuService实现分页条件查询Sku
         PageInfo<Sku> pageInfo = skuService.findPage(sku, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

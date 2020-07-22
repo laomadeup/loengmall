@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.CategoryBrand;
 import com.loengmall.goods.service.CategoryBrandService;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +35,7 @@ public class CategoryBrandController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  CategoryBrand categoryBrand, @PathVariable  int page, @PathVariable  int size){
         //调用CategoryBrandService实现分页条件查询CategoryBrand
         PageInfo<CategoryBrand> pageInfo = categoryBrandService.findPage(categoryBrand, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

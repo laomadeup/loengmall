@@ -1,5 +1,7 @@
 package com.loengmall.goods.service.impl;
+import com.loengmall.goods.dao.CategoryMapper;
 import com.loengmall.goods.dao.ParaMapper;
+import com.loengmall.goods.pojo.Category;
 import com.loengmall.goods.pojo.Para;
 import com.loengmall.goods.service.ParaService;
 import com.github.pagehelper.PageHelper;
@@ -19,7 +21,27 @@ public class ParaServiceImpl implements ParaService {
 
     @Autowired
     private ParaMapper paraMapper;
+    
+    @Autowired
+    private CategoryMapper categoryMapper;
 
+    /**
+     * <p>根据分类ID查询参数</p>
+     *
+     * * @param categoryId
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Para>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:07
+     */
+    @Override
+    public List<Para> findByCategory(Integer categoryId) {
+        Category category = categoryMapper.selectByPrimaryKey(categoryId);
+        Para para = new Para();
+        para.setTemplateId(category.getTemplateId());
+        return paraMapper.select(para);
+    }
 
     /**
      * Para条件+分页查询

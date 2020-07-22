@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.UndoLog;
 import com.loengmall.goods.service.UndoLogService;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +35,7 @@ public class UndoLogController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  UndoLog undoLog, @PathVariable  int page, @PathVariable  int size){
         //调用UndoLogService实现分页条件查询UndoLog
         PageInfo<UndoLog> pageInfo = undoLogService.findPage(undoLog, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

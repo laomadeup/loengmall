@@ -8,6 +8,20 @@ import java.util.List;
  * @Date 2020/07/21 22:24
  *****/
 public interface CategoryService {
+    
+    /**
+     * <p>根据父ID查询分类</p>
+     *
+     * * @param 
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Category>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 8:29
+     */
+    List<Category> findByParentId(Integer pid);
+    
+    
 
     /***
      * Category多条件分页查询

@@ -1,4 +1,6 @@
 package com.loengmall.goods.controller;
+import com.loeng.entity.Result;
+import com.loeng.entity.StatusCode;
 import com.loengmall.goods.pojo.StockBack;
 import com.loengmall.goods.service.StockBackService;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +35,7 @@ public class StockBackController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  StockBack stockBack, @PathVariable  int page, @PathVariable  int size){
         //调用StockBackService实现分页条件查询StockBack
         PageInfo<StockBack> pageInfo = stockBackService.findPage(stockBack, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***

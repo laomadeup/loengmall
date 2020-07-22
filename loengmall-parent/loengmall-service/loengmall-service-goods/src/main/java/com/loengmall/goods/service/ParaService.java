@@ -9,6 +9,19 @@ import java.util.List;
  *****/
 public interface ParaService {
 
+    /**
+     * <p>根据分类ID查询参数</p>
+     *
+     * * @param categoryId
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Para>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:26
+     */
+    List<Para> findByCategory(Integer categoryId);
+    
+    
     /***
      * Para多条件分页查询
      * @param para

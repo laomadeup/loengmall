@@ -9,6 +9,18 @@ import java.util.List;
  *****/
 public interface SpecService {
 
+    /**
+     * <p>根据分类Id查询规格</p>
+     *
+     * * @param categoryid
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Spec>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 9:25
+     */
+    List<Spec> findByCategory(Integer categoryid);
+    
     /***
      * Spec多条件分页查询
      * @param spec

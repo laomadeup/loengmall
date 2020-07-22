@@ -9,6 +9,19 @@ import java.util.List;
  *****/
 public interface BrandService {
 
+
+    /**
+     * <p>根据分类Id查询品牌</p>
+     *
+     * * @param categoryid
+     *
+     * @return java.util.List<com.loengmall.goods.pojo.Brand>
+     *
+     * @author mapengliang
+     * @createTime 2020/7/22 8:41
+     */
+    List<Brand> findByCategory(Integer categoryid);
+
     /***
      * Brand多条件分页查询
      * @param brand
