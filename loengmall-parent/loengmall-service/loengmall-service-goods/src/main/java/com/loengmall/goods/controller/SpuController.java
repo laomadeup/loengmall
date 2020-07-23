@@ -25,6 +25,72 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
+
+    /**
+     * <p>批量上架商品成功</p>
+     *
+     * * @param ids
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:18
+     */
+    @PutMapping("/put/many")
+    public Result putMany(@PathVariable Long[] ids){
+        spuService.putMany(ids);
+        return new Result(true,StatusCode.OK,"批量上架商品成功!");
+    }
+
+    /**
+     * <p>商品上架成功</p>
+     *
+     * * @param spuId
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:01
+     */
+    @PutMapping(value = "/put/{id}")
+    public Result put(@PathVariable Long spuId){
+        spuService.put(spuId);
+        return new Result(true,StatusCode.OK,"商品上架成功!");
+    }
+
+    /**
+     * <p>商品下架成功</p>
+     *
+     * * @param spuId
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:01
+     */
+    @PutMapping(value = "/pull/{id}")
+    public Result pull(@PathVariable Long spuId){
+        spuService.pull(spuId);
+        return new Result(true,StatusCode.OK,"商品下架成功!");
+    }
+
+    /**
+     * <p>审核商品成功</p>
+     *
+     * * @param spuId
+     *
+     * @return com.loeng.entity.Result
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:01
+     */
+    @PutMapping(value = "/audit/{id}")
+    public Result audit(@PathVariable Long spuId){
+        spuService.audit(spuId);
+        return new Result(true,StatusCode.OK,"审核商品成功!");
+    }
+
+
     /**
      * <p>根据商品ID查询商品成功</p>
      *

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,96 @@ public class SpuServiceImpl implements SpuService {
 
     @Autowired
     private BrandMapper brandMapper;
+
+    /**
+     * <p>批量上架商品</p>
+     *
+     * * @param ids
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:16
+     */
+    @Override
+    public void putMany(Long[] ids) {
+        Example example = new Example(Spu.class);
+
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", Arrays.asList(ids));
+        criteria.andEqualTo("status","1");
+        criteria.andEqualTo("isDelete","0");
+
+        Spu spu = new Spu();
+        spu.setIsMarketable("1");
+        spuMapper.updateByExampleSelective(spu, example);
+        
+    }
+
+    /**
+     * <p>商品上架</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:03
+     */
+    @Override
+    public void put(Long spuId) {
+        Spu spu = spuMapper.selectByPrimaryKey(spuId);
+        if(spu.getIsDelete().equalsIgnoreCase("1")){
+            throw new RuntimeException("此商品已删除!");
+        }
+        if(!spu.getStatus().equals("1")){
+            throw new RuntimeException("不能对已经删除的商品上架!");
+        }
+        spu.setIsMarketable("1");
+        spuMapper.updateByPrimaryKey(spu);
+    }
+
+    /**
+     * <p>商品下架</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:03
+     */
+    @Override
+    public void pull(Long spuId) {
+        Spu spu = spuMapper.selectByPrimaryKey(spuId);
+        if(spu.getIsDelete().equalsIgnoreCase("1")){
+            throw new RuntimeException("不能对已经删除的商品下架!");
+        }
+        spu.setIsMarketable("0");
+        spuMapper.updateByPrimaryKey(spu);
+    }
+
+    /**
+     * <p>审核商品</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 20:59
+     */
+    @Override
+    public void audit(Long spuId) {
+
+        Spu spu = spuMapper.selectByPrimaryKey(spuId);
+        if(spu.getIsDelete().equalsIgnoreCase("1")){
+            throw new RuntimeException("不能对已删除的商品进行审核!");
+        }
+        spu.setStatus("1");//审核状态
+        spu.setIsMarketable("1");//上架
+        spuMapper.updateByPrimaryKey(spu);
+    }
 
     /**
      * <p>根据商品id获取商品信息</p>
@@ -82,8 +173,17 @@ public class SpuServiceImpl implements SpuService {
     public void saveGoods(Goods goods) {
         Spu spu = goods.getSpu();
         List<Sku> skuList = goods.getSkuList();
-        spu.setId(idWorker.nextId());
-        spuMapper.insertSelective(spu);
+
+        if(spu.getId() != null) {
+            spu.setId(idWorker.nextId());
+            spuMapper.insertSelective(spu);
+        }else{
+            spuMapper.updateByPrimaryKeySelective(spu);
+            Sku sku = new Sku();
+            sku.setSpuId(spu.getId());
+            skuMapper.delete(sku);
+        }
+
         Date date = new Date();
         Category category = categoryMapper.selectByPrimaryKey(spu.getCategory3Id());
         Brand brand = brandMapper.selectByPrimaryKey(spu.getBrandId());

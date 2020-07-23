@@ -10,6 +10,57 @@ import java.util.List;
  *****/
 public interface SpuService {
 
+    /**
+     * <p>批量上架</p>
+     *
+     * * @param ids
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:11
+     */
+    void putMany(Long[] ids);
+
+
+    /**
+     * <p>商品上架</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:02
+     */
+    void put(Long spuId);
+
+
+    /**
+     * <p>商品下架</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 21:02
+     */
+    void pull(Long spuId);
+
+
+    /**
+     * <p>审核商品</p>
+     *
+     * * @param spuId
+     *
+     * @return void
+     *
+     * @author mapengliang
+     * @createTime 2020/7/23 20:55
+     */
+    void audit(Long spuId);
+
 
     /**
      * <p>根据商品Id查询商品信息</p>
