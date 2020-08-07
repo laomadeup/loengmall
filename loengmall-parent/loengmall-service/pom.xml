@@ -19,6 +19,7 @@
     <modules>
         <module>loengmall-service-goods</module>
         <module>loengmall-service-file</module>
+        <module>loengmall-service-canal</module>
     </modules>
 
     <!--依赖包-->
