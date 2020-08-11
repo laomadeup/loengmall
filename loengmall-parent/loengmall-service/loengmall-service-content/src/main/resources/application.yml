@@ -5,14 +5,14 @@ spring:
     name: content
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.211.132:3306/changgou_content?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/loengmall_content?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
 
 eureka:
   client:
     service-url:
-      default: 127.0.0.1:18081/eureka
+      default: http://127.0.0.1:18081/eureka
   instance:
     prefer-ip-address: true
 

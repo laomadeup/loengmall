@@ -29,7 +29,7 @@ public class CanalDataEventListener {
      */
     @InsertListenPoint
     public void onEventInsert(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
-
+        System.out.printf("onEventInsert");
         List<CanalEntry.Column> afterColumnsList = rowData.getAfterColumnsList();
         for (CanalEntry.Column column : afterColumnsList) {
             System.out.println("插入 列名:" + column.getName() + "--------变更的数据:" + column.getValue());
@@ -50,6 +50,7 @@ public class CanalDataEventListener {
      */
     @UpdateListenPoint
     public void onEventUpdate(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+        System.out.printf("onEventUpdate");
 
         List<CanalEntry.Column> beforeColumnsList = rowData.getBeforeColumnsList();
         List<CanalEntry.Column> afterColumnsList = rowData.getAfterColumnsList();
@@ -72,6 +73,7 @@ public class CanalDataEventListener {
      */
     @DeleteListenPoint
     public void onEventDelete(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+        System.out.printf("onEventDelete");
 
         List<CanalEntry.Column> beforeColumnsList = rowData.getBeforeColumnsList();
         for (CanalEntry.Column column : beforeColumnsList) {
@@ -83,7 +85,7 @@ public class CanalDataEventListener {
     @ListenPoint(destination = "example",schema ="loengmall_content",table = {"tb_content","tb_content_category"}
                 ,eventType = {CanalEntry.EventType.UPDATE, CanalEntry.EventType.DELETE})
     public void onEventCustomUpdate(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
-
+        System.out.printf("onEventCustomUpdate");
         List<CanalEntry.Column> beforeColumnsList = rowData.getBeforeColumnsList();
         List<CanalEntry.Column> afterColumnsList = rowData.getAfterColumnsList();
         for (CanalEntry.Column column : beforeColumnsList) {

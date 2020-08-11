@@ -5,7 +5,8 @@ spring:
     name: canal
 eureka:
   client:
-    service-url: 127.0.0.1:7001/eureka
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
   instance:
     prefer-ip-address: true
 feign:
