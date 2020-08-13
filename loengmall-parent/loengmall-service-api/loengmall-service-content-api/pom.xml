@@ -11,5 +11,13 @@
 
     <artifactId>loengmall-service-content-api</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.loeng</groupId>
+            <artifactId>loengmall-common-db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -1,15 +1,10 @@
 package com.loengmall.content.feign;
+
 import com.github.pagehelper.PageInfo;
 import com.loeng.entity.Result;
 import com.loengmall.content.pojo.Content;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -88,4 +83,18 @@ public interface ContentFeign {
      */
     @GetMapping
     Result<List<Content>> findAll();
+
+
+    /**
+     * <p>根据分类ID查询广告</p>
+     *
+     * * @param id
+     *
+     * @return com.loeng.entity.Result<java.util.List<com.loengmall.content.pojo.Content>>
+     *
+     * @author mapengliang
+     * @createTime 2020/8/13 9:16
+     */
+    @GetMapping(value = "/list/category/{id}")
+    Result<List<Content>> findByCategory(@PathVariable Long id);
 }

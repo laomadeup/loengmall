@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: canal
+  redis:
+    host: 172.20.63.122
+    port: 3306
 eureka:
   client:
     service-url:
@@ -27,5 +30,5 @@ canal:
   client:
     instances:
       example:
-        host: 127.0.0.1
+        host: 172.20.63.122
         port: 11111

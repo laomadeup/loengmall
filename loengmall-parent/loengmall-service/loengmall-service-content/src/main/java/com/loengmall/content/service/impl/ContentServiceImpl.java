@@ -154,4 +154,22 @@ public class ContentServiceImpl implements ContentService {
     public List<Content> findAll() {
         return contentMapper.selectAll();
     }
+
+    /**
+     * <p>findByCategory</p>
+     *
+     * * @param id
+     *
+     * @return java.util.List<com.loengmall.content.pojo.Content>
+     *
+     * @author mapengliang
+     * @createTime 2020/8/13 8:51
+     */
+    @Override
+    public List<Content> findByCategory(Long id) {
+        Content content = new Content();
+        content.setCategoryId(id);
+        content.setStatus("1");
+        return contentMapper.select(content);
+    }
 }

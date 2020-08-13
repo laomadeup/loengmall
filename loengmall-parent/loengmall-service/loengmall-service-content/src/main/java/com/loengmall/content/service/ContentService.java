@@ -64,4 +64,18 @@ public interface ContentService {
      * @return
      */
     List<Content> findAll();
+
+    /**
+     * <p>findByCategory</p>
+     *
+     * * @param id
+     *
+     * @return java.util.List<com.loengmall.content.pojo.Content>
+     *
+     * @author mapengliang
+     * @createTime 2020/8/13 8:48
+     */
+    List<Content> findByCategory(Long id);
+
+
 }
