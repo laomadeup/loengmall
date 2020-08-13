@@ -1,7 +1,10 @@
 package com.loengmall.canal.listener;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.otter.canal.protocol.CanalEntry;
+import com.loeng.entity.Result;
 import com.loengmall.content.feign.ContentFeign;
+import com.loengmall.content.pojo.Content;
 import com.xpand.starter.canal.annotation.CanalEventListener;
 import com.xpand.starter.canal.annotation.DeleteListenPoint;
 import com.xpand.starter.canal.annotation.InsertListenPoint;
@@ -107,36 +110,40 @@ public class CanalDataEventListener {
     @ListenPoint(destination = "example", schema = "loengmall_content", table = {"tb_content", "tb_content_category"}
             , eventType = {CanalEntry.EventType.UPDATE, CanalEntry.EventType.DELETE, CanalEntry.EventType.INSERT})
     public void onEventCustomUpdate(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
+        System.out.println("onEventCustomUpdate");
+        String categoryId = getColumnValue(eventType, rowData);
+        System.out.println("categoryId:"+categoryId);
+        Result<List<Content>> resultContents = contentFeign.findByCategory(Long.valueOf(categoryId));
 
-        getColumnValue(eventType, rowData);
-
-
-        System.out.printf("onEventCustomUpdate");
-        List<CanalEntry.Column> beforeColumnsList = rowData.getBeforeColumnsList();
-        List<CanalEntry.Column> afterColumnsList = rowData.getAfterColumnsList();
-        for (CanalEntry.Column column : beforeColumnsList) {
-            System.out.println("====自定义操作前 列名:" + column.getName() + "--------变更的数据:" + column.getValue());
-        }
-        for (CanalEntry.Column column : afterColumnsList) {
-            System.out.println("====自定义操作后 列名:" + column.getName() + "--------变更的数据:" + column.getValue());
-
-        }
-
+        List<Content> contents = resultContents.getData();
+        //使用redisTemplate存储到redis中
+        stringRedisTemplate.boundValueOps("content_"+categoryId).set(JSON.toJSONString(contents));
     }
 
     private String getColumnValue(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
 
         String categoryId = "";
         if (CanalEntry.EventType.DELETE == eventType) {
-            Optional<CanalEntry.Column> optionalColumn = rowData.getBeforeColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "categoryId")).findFirst();
-            return optionalColumn.orElse((CanalEntry.Column) new Object()).getValue();
-
+           /* Optional<CanalEntry.Column> optionalColumn = rowData.getBeforeColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).findFirst();
+            return optionalColumn.orElse((CanalEntry.Column) new Object()).getValue();*/
+            List<CanalEntry.Column> columnData = rowData.getBeforeColumnsList();
+            for (int i = 0; i < columnData.size(); i++) {
+                if(StringUtils.equalsIgnoreCase(columnData.get(i).getName(),"category_id")){
+                    return columnData.get(i).getValue();
+                }
+            }
+            return categoryId;
         } else {
-            Optional<CanalEntry.Column> optionalColumn = rowData.getAfterColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "categoryId")).findFirst();
-            return optionalColumn.orElse(null).getValue();
+            List<CanalEntry.Column> columnData = rowData.getAfterColumnsList();
+            for (int i = 0; i < columnData.size(); i++) {
+                if(StringUtils.equalsIgnoreCase(columnData.get(i).getName(),"category_id")){
+                    return columnData.get(i).getValue();
+                }
+            }
+//            return rowData.getAfterColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).map(CanalEntry.Column::getValue).findAny().orElse("");
+
         }
-
-
+        return categoryId;
     }
 
 }
