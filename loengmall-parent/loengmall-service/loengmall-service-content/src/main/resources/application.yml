@@ -8,11 +8,10 @@ spring:
     url: jdbc:mysql://localhost:3306/loengmall_content?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: root
-
 eureka:
   client:
     service-url:
-      default: http://127.0.0.1:18081/eureka
+      defaultZone: http://127.0.0.1:7001/eureka
   instance:
     prefer-ip-address: true
 
@@ -33,3 +32,7 @@ hystrix:
           enabled: true
         isolation:
           strategy: SEMAPHORE
+#开启eureka负载均衡策略
+ribbon:
+  eureka:
+    enabled: true

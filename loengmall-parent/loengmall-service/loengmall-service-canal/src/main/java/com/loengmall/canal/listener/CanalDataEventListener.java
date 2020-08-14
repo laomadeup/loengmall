@@ -123,27 +123,14 @@ public class CanalDataEventListener {
     private String getColumnValue(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
 
         String categoryId = "";
-        if (CanalEntry.EventType.DELETE == eventType) {
-           /* Optional<CanalEntry.Column> optionalColumn = rowData.getBeforeColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).findFirst();
-            return optionalColumn.orElse((CanalEntry.Column) new Object()).getValue();*/
-            List<CanalEntry.Column> columnData = rowData.getBeforeColumnsList();
-            for (int i = 0; i < columnData.size(); i++) {
-                if(StringUtils.equalsIgnoreCase(columnData.get(i).getName(),"category_id")){
-                    return columnData.get(i).getValue();
-                }
-            }
-            return categoryId;
+        //判断 如果是删除  则获取beforlist
+        if (eventType == CanalEntry.EventType.DELETE) {
+            return rowData.getAfterColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).map(CanalEntry.Column::getValue).findAny().orElse("");
         } else {
-            List<CanalEntry.Column> columnData = rowData.getAfterColumnsList();
-            for (int i = 0; i < columnData.size(); i++) {
-                if(StringUtils.equalsIgnoreCase(columnData.get(i).getName(),"category_id")){
-                    return columnData.get(i).getValue();
-                }
-            }
-//            return rowData.getAfterColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).map(CanalEntry.Column::getValue).findAny().orElse("");
-
+            //判断 如果是添加 或者是更新 获取afterlist
+            return rowData.getAfterColumnsList().stream().filter(column -> StringUtils.equalsIgnoreCase(column.getName(), "category_id")).map(CanalEntry.Column::getValue).findAny().orElse("");
         }
-        return categoryId;
+        //return categoryId;
     }
 
 }
